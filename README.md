@@ -10,4 +10,4 @@
 - [x] **1.2** [course information, step2](./part1/courseinfo/)
 - [x] **1.3** [course information, step3](./part1/courseinfo/)
 - [x] **1.4** [course information, step4](./part1/courseinfo/)
-- [ ] **1.5** [course information, step5](./part1/courseinfo/)
+- [x] **1.5** [course information, step5](./part1/courseinfo/)
