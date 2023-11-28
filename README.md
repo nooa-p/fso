@@ -23,3 +23,6 @@
 - [x] **1.9** [unicafe, step4](./part1/unicafe/)
 - [x] **1.10** [unicafe, step5](./part1/unicafe/)
 - [x] **1.11** [unicafe, step6](./part1/unicafe/)
+- [x] **1.12** [anecdotes, step1](./part1/anecdotes/)
+- [x] **1.13** [anecdotes, step2](./part1/anecdotes/)
+- [x] **1.14** [anecdotes, step3](./part1/anecdotes/)
