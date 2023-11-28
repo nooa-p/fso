@@ -13,8 +13,19 @@ const Heading = ({ text }) => {
 }
 
 const StatisticLine = ({ type, number }) => {
+  if (type === 'positive') {
+    return (
+      <tr>
+      <td>{type}</td>
+      <td>{number} %</td>
+    </tr>
+    )
+  }
   return (
-    <span>{type} {number}</span>
+    <tr>
+      <td>{type}</td>
+      <td>{number}</td>
+    </tr>
   )
 }
 
@@ -23,14 +34,16 @@ const Statistics = ({good, neutral, bad, total, average, positive}) => {
     return <span>No feedback given</span>
   }
   return (
-    <div>
-      <StatisticLine type='good' number={good} /> <br />
-      <StatisticLine type='neutral' number={neutral} /> <br />
-      <StatisticLine type='bad' number={bad} /> <br />
-      <StatisticLine type='total' number={total} /> <br />
-      <StatisticLine type='average' number={average} /> <br />
-      <StatisticLine type='positive' number={positive} /> %
-    </div>
+    <table>
+      <tbody>
+      <StatisticLine type='good' number={good} />
+      <StatisticLine type='neutral' number={neutral} />
+      <StatisticLine type='bad' number={bad} />
+      <StatisticLine type='total' number={total} />
+      <StatisticLine type='average' number={average} />
+      <StatisticLine type='positive' number={positive} />
+      </tbody>
+    </table>
   )
 }
 
