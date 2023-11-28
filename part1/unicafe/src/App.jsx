@@ -12,9 +12,25 @@ const Heading = ({ text }) => {
   return <h1>{text}</h1>
 }
 
-const Static = ({ type, number }) => {
+const StatisticLine = ({ type, number }) => {
   return (
     <span>{type} {number}</span>
+  )
+}
+
+const Statistics = ({good, neutral, bad, total, average, positive}) => {
+  if (total === 0) {
+    return <span>No feedback given</span>
+  }
+  return (
+    <div>
+      <StatisticLine type='good' number={good} /> <br />
+      <StatisticLine type='neutral' number={neutral} /> <br />
+      <StatisticLine type='bad' number={bad} /> <br />
+      <StatisticLine type='total' number={total} /> <br />
+      <StatisticLine type='average' number={average} /> <br />
+      <StatisticLine type='positive' number={positive} /> %
+    </div>
   )
 }
 
@@ -59,12 +75,7 @@ const App = () => {
       <Button onClick={handleNeutral} text={'neutral'} />
       <Button onClick={handleBad} text={'bad'} />
       <Heading text='statistics' />
-      <Static type='good' number={reviews.good} /> <br />
-      <Static type='neutral' number={reviews.neutral} /> <br />
-      <Static type='bad' number={reviews.bad} /> <br />
-      <Static type= 'total' number={total} /> <br />
-      <Static type='average' number={average} /> <br />
-      <Static type='positive' number={positive} /> %
+      <Statistics good={reviews.good} neutral={reviews.neutral} bad={reviews.bad} total={total} average={average} positive={positive} />
     </div>
   )
 }
