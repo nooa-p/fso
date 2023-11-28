@@ -12,3 +12,7 @@
 - [x] **1.4** [course information, step4](./part1/courseinfo/)
 - [x] **1.5** [course information, step5](./part1/courseinfo/)
 - [x] **1.6** [unicafe, step1](./part1/unicafe/)
+- [x] **1.7** [unicafe, step2](./part1/unicafe/)
+- [x] **1.8** [unicafe, step3](./part1/unicafe/)
+- [x] **1.9** [unicafe, step4](./part1/unicafe/)
+- [x] **1.10** [unicafe, step5](./part1/unicafe/)
