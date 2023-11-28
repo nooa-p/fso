@@ -1,5 +1,11 @@
 # Full Stack Open 2023 Submissions
 
+## Table of contents
+- [part 0](#part-0)
+- [part 1](#part-1)
+
+---
+
 ## part 0
 - [x] **0.4** [New note diagram](./part0/new-note-diagram.md)
 - [x] **0.5** [Single page app diagram](./part0/spa-diagram.md)
@@ -16,3 +22,4 @@
 - [x] **1.8** [unicafe, step3](./part1/unicafe/)
 - [x] **1.9** [unicafe, step4](./part1/unicafe/)
 - [x] **1.10** [unicafe, step5](./part1/unicafe/)
+- [x] **1.11** [unicafe, step6](./part1/unicafe/)
