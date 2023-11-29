@@ -3,6 +3,7 @@ import nameService from './services/persons'
 import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
+import { getAdapter } from 'axios'
 
 const App = () => {
   const [persons, setPersons] = useState([]) 
@@ -26,8 +27,7 @@ const App = () => {
     e.preventDefault()
     const nameObject = {
       name: newName,
-      number: newNumber,
-      id: persons.length + 1
+      number: newNumber
     }
     if (persons.some((e) => e.name === newName)) {
       alert(`${newName} is already added to phonebook`)
@@ -39,6 +39,14 @@ const App = () => {
           setNewName('')
           setNewNumber('')
         })
+    }
+  }
+
+  const deleteName = (id) => {
+    if (window.confirm(`Delete ${id}?`)) {
+      nameService
+        .deleteThis(id)
+        .then(setPersons(persons.filter(person => person.id ==! id)))
     }
   }
 
@@ -61,7 +69,7 @@ const App = () => {
       <h3>add a new</h3>
       <PersonForm onSubmit={addName} newName={newName} newNumber={newNumber} nameChange={nameChange} numberChange={numberChange} />
       <h3>Numbers</h3>
-      <Persons names={namesToShow} />
+      <Persons names={namesToShow} deleteName={deleteName} />
     </div>
    )
 }
