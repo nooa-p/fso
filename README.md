@@ -18,3 +18,4 @@
 - [x] **1.12-1.14** [anecdotes](./part1/anecdotes/)
 
 ## part 2
+- [x] **2.1-2.5** [course information](./part2/courseinfo/)
