@@ -24,6 +24,16 @@
       "name": "Testi Nimi",
       "number": "040-0123456",
       "id": 5
+    },
+    {
+      "name": "Testi Kaksi",
+      "number": "050-12345",
+      "id": 6
+    },
+    {
+      "name": "Testi Kolme",
+      "number": "0400 1234567",
+      "id": 7
     }
   ]
 }
