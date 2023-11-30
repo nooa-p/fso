@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import getAll from './services/countries'
 import Search from "./components/Search"
 import Country from "./components/Country"
+import './index.css'
 
 const App = () => {
   const [search, setSearch] = useState('')
