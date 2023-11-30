@@ -1,6 +1,6 @@
 const Search = (props) => {
     return (
-        <form>
+        <form onSubmit={props.default}>
             find countries <input value={props.value} onChange={props.onChange} />
         </form>
     )

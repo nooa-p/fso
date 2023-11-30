@@ -3,7 +3,7 @@ const Country = (props) => {
         return <span>Too many matches, specify another filter</span>
     } else if (props.filter.length <= 10 && props.filter.length > 1) {
         return props.filter.map((country) => <span key={country.name.common}>{country.name.common} <br /></span>)
-    } else {
+    } else  if (props.filter.length === 1) {
         return (
             <div>
                 <h2>{props.filter[0].name.common}</h2>
@@ -20,6 +20,8 @@ const Country = (props) => {
                 <img src={props.filter[0].flags.png} height='150px' />
             </div>
         )
+    } else {
+        return <span>Search returned no countries</span>
     }
 }
 

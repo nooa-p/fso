@@ -19,6 +19,10 @@ const App = () => {
     setSearch(e.target.value)
   }
 
+  const preventSubmit = (e) => {
+    e.preventDefault()
+  }
+
   const countryFilter = (array) => {
     if (search !== '') {
       const filter = array.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()))
@@ -32,7 +36,7 @@ const App = () => {
  
   return (
     <div>
-      <Search value={search} onChange={changeSearch}/>
+      <Search value={search} onChange={changeSearch} default={preventSubmit}/>
       <Country filter={filtered} />
     </div>
   )
