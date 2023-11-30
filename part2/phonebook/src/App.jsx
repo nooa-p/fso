@@ -12,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [addedMessage, setAddedMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     nameService
@@ -45,6 +46,13 @@ const App = () => {
             }, 5000)
             setNewName('')
             setNewNumber('')
+          })
+          .catch(error => {
+            setErrorMessage(`Information of ${newName} has already been deleted from server`)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+            setPersons(persons.filter(person => person.id !== changedPerson.id))
           })
       }
     } else {
@@ -86,7 +94,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={addedMessage} />
+      <Notification message={addedMessage} className='notif' />
+      <Notification message={errorMessage} className='error' />
       <Filter filter={filter} onChange={filterChange} />
       <h3>add a new</h3>
       <PersonForm onSubmit={addName} newName={newName} newNumber={newNumber} nameChange={nameChange} numberChange={numberChange} />
