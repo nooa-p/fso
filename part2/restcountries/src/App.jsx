@@ -1,34 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react"
+import getAll from './services/countries'
+import Search from "./components/Search"
+import Country from "./components/Country"
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [search, setSearch] = useState('')
+  const [countries, setCountries] = useState(null)
 
+  useEffect(() => {
+    getAll().then(response => setCountries(response))
+  }, [])
+
+  if(!countries) {
+    return <p>stil fetching...</p>
+  }
+
+  const changeSearch = (e) => {
+    setSearch(e.target.value)
+  }
+
+  const countryFilter = (array) => {
+    if (search !== '') {
+      const filter = array.filter(country => country.name.common.toLowerCase().includes(search.toLowerCase()))
+      return filter
+    } else {
+      return array
+    }
+  }
+
+  const filtered = countryFilter(countries)
+ 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div>
+      <Search value={search} onChange={changeSearch}/>
+      <Country filter={filtered} />
+    </div>
   )
 }
 
