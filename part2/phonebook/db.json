@@ -17,8 +17,13 @@
     },
     {
       "name": "Maija Meikalainen",
-      "number": "0400-49294952",
+      "number": "040-98765432",
       "id": 5
+    },
+    {
+      "name": "Maija-Maria Meikalainen",
+      "number": "040-1234567",
+      "id": 6
     }
   ]
 }
