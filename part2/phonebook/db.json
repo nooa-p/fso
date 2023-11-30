@@ -6,14 +6,19 @@
       "id": 2
     },
     {
-      "name": "fgdfgfsd",
-      "number": "234325524",
+      "name": "Matti Meikalainen",
+      "number": "040-4059123",
       "id": 3
     },
     {
-      "name": "fgfdgfdhdfh",
-      "number": "543535",
+      "name": "Ville Virtanen",
+      "number": "050-48230405",
       "id": 4
+    },
+    {
+      "name": "Maija Meikalainen",
+      "number": "0400-49294952",
+      "id": 5
     }
   ]
 }
