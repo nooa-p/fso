@@ -19,4 +19,4 @@
 
 ## part 2
 - [x] **2.1-2.5** [course information](./part2/courseinfo/)
-- [x] **2.6-2.10** [phonebook](./part2/phonebook/)
+- [x] **2.6-2.17** [phonebook](./part2/phonebook/)
