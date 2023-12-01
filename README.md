@@ -22,4 +22,4 @@
 - [x] **2.6-2.19** [phonebook](./part2/phonebook/)\
 
 ## part 3
-- [ ] 3.1 [phonebook backend](https://github.com/nooa-p/fso-part3)
+- [x] **3.1-3.6** [phonebook backend](https://github.com/nooa-p/fso-part3)
