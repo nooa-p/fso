@@ -19,4 +19,7 @@
 
 ## part 2
 - [x] **2.1-2.5** [course information](./part2/courseinfo/)
-- [x] **2.6-2.19** [phonebook](./part2/phonebook/)
+- [x] **2.6-2.19** [phonebook](./part2/phonebook/)\
+
+## part 3
+- [ ] 3.1 [phonebook backend](https://github.com/nooa-p/fso-part3)
