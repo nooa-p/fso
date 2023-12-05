@@ -6,8 +6,6 @@
 - [part 2](#part-2)
 - [part 3](#part-3)
 
----
-
 ## part 0
 - [x] **0.4** [New note diagram](./part0/new-note-diagram.md)
 - [x] **0.5** [Single page app diagram](./part0/spa-diagram.md)
