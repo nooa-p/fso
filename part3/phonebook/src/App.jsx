@@ -33,28 +33,32 @@ const App = () => {
       number: newNumber
     }
     if (persons.some((e) => e.name === newName)) {
-      if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
-        const person = persons.find(person => person.name === newName)
-        const changedPerson = {...person, number: newNumber}
-        nameService
-          .changeNumber(person.id, changedPerson)
-          .then(response => {
-            setPersons(persons.map(person => person.name !== newName ? person : response))
-            setAddedMessage(`Changed ${newName}`)
-            setTimeout(() => {
-              setAddedMessage(null)
-            }, 5000)
-            setNewName('')
-            setNewNumber('')
-          })
-          .catch(error => {
-            setErrorMessage(`Information of ${newName} has already been deleted from server`)
-            setTimeout(() => {
-              setErrorMessage(null)
-            }, 5000)
-            setPersons(persons.filter(person => person.id !== changedPerson.id))
-          })
-      }
+      setErrorMessage(`${newName} is already added to the phonebook.`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+      // if (window.confirm(`${newName} is already added to the phonebook, replace the old number with a new one?`)) {
+      //   const person = persons.find(person => person.name === newName)
+      //   const changedPerson = {...person, number: newNumber}
+      //   nameService
+      //     .changeNumber(person.id, changedPerson)
+      //     .then(response => {
+      //       setPersons(persons.map(person => person.name !== newName ? person : response))
+      //       setAddedMessage(`Changed ${newName}`)
+      //       setTimeout(() => {
+      //         setAddedMessage(null)
+      //       }, 5000)
+      //       setNewName('')
+      //       setNewNumber('')
+      //     })
+      //     .catch(error => {
+      //       setErrorMessage(`Information of ${newName} has already been deleted from server`)
+      //       setTimeout(() => {
+      //         setErrorMessage(null)
+      //       }, 5000)
+      //       setPersons(persons.filter(person => person.id !== changedPerson.id))
+      //     })
+      // }
     } else {
       nameService
         .create(nameObject)
@@ -66,6 +70,12 @@ const App = () => {
             }, 5000)
           setNewName('')
           setNewNumber('')
+        })
+        .catch(error => {
+          setErrorMessage('You are missing some information')
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 5000)
         })
     }
   }
