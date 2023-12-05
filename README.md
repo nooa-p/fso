@@ -1,9 +1,10 @@
-# Full Stack Open 2023 Submissions
+# Full Stack Open 2023 Submissions <!-- omit from toc -->
 
-## Table of contents
-  - [part 0](#part-0)
-  - [part 1](#part-1)
-  - [part 2](#part-2)
+## Table of contents <!-- omit from toc -->
+- [part 0](#part-0)
+- [part 1](#part-1)
+- [part 2](#part-2)
+- [part 3](#part-3)
 
 ---
 
