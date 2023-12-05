@@ -25,3 +25,4 @@
 - [x] **3.9** [phonebook](./part3/phonebook/)
 - [x] **3.10** [phonebook backend](https://github.com/nooa-p/fso-part3) / [on render](https://fso-backend-kiqt.onrender.com/)
 - [x] **3.11** [phonebook full stack](https://fso-backend-kiqt.onrender.com/) 
+- [x] **3.12** [command-line mongodb](https://github.com/nooa-p/fso-part3/blob/main/mongo.js)
