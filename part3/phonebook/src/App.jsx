@@ -68,7 +68,7 @@ const App = () => {
           setNewNumber('')
         })
         .catch(error => {
-          setErrorMessage('You are missing some information')
+          setErrorMessage(error.response.data.error)
           setTimeout(() => {
             setErrorMessage(null)
           }, 5000)
