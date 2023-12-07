@@ -46,6 +46,30 @@ const mostBlogs = (blogs) => {
   return null;
 };
 
+const mostLikes = (blogs) => {
+  if (blogs.length > 0) {
+    const authors = blogs.map((blog) => blog.author);
+    const unique = [...new Set(authors)];
+    let tempLikes = blogs[0].likes;
+    let tempAuthor = unique[0];
+    let likeNumber = 0;
+    unique.forEach((author) => {
+      blogs.forEach((blog) => {
+        if (author === blog.author) {
+          likeNumber += blog.likes;
+        }
+      });
+      if (likeNumber > tempLikes) {
+        tempLikes = likeNumber;
+        tempAuthor = author;
+      }
+      likeNumber = 0;
+    });
+    return { author: tempAuthor, likes: tempLikes };
+  }
+  return null;
+};
+
 module.exports = {
-  dummy, totalLikes, favoriteBlog, mostBlogs,
+  dummy, totalLikes, favoriteBlog, mostBlogs, mostLikes,
 };
