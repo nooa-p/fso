@@ -22,6 +22,6 @@ module.exports = {
     ecmaVersion: 'latest',
   },
   rules: {
-    'linebreak-style': 'windows',
+    'no-console': 0,
   },
 };
