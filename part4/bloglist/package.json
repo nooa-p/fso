@@ -1,0 +1,32 @@
+{
+  "name": "bloglist",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nooa-p/fso"
+  },
+  "author": "Nooa Peltokangas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nooa-p/fso/issues"
+  },
+  "homepage": "https://github.com/nooa-p/fso#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.6.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "nodemon": "^3.0.2"
+  }
+}
