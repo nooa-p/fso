@@ -48,11 +48,10 @@ const App = () => {
             setNewNumber('')
           })
           .catch(error => {
-            setErrorMessage(`Information of ${newName} has already been deleted from server`)
+            setErrorMessage(error.response.data.error)
             setTimeout(() => {
               setErrorMessage(null)
             }, 5000)
-            setPersons(persons.filter(person => person.id !== changedPerson.id))
           })
       }
     } else {
