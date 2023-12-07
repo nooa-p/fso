@@ -26,4 +26,4 @@
 - [x] **3.10** [phonebook backend](https://github.com/nooa-p/fso-part3) / [on render](https://fso-backend-kiqt.onrender.com/)
 - [x] **3.11** [phonebook full stack](https://fso-backend-kiqt.onrender.com/) 
 - [x] **3.12** [command-line mongodb](https://github.com/nooa-p/fso-part3/blob/main/mongo.js)
-- [x] **3.13-1.18** [phonebook database](https://github.com/nooa-p/fso-part3)
+- [x] **3.13-3.21** [phonebook database](https://github.com/nooa-p/fso-part3)
