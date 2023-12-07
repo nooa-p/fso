@@ -22,6 +22,30 @@ const favoriteBlog = (blogs) => {
   return null;
 };
 
+const mostBlogs = (blogs) => {
+  if (blogs.length > 0) {
+    const authors = blogs.map((blog) => blog.author);
+    const unique = [...new Set(authors)];
+    let tempBlogs = 1;
+    let tempAuthor = unique[0];
+    let blogNumber = 0;
+    unique.forEach((author) => {
+      blogs.forEach((blog) => {
+        if (author === blog.author) {
+          blogNumber += 1;
+        }
+      });
+      if (blogNumber > tempBlogs) {
+        tempBlogs = blogNumber;
+        tempAuthor = author;
+      }
+      blogNumber = 0;
+    });
+    return { author: tempAuthor, blogs: tempBlogs };
+  }
+  return null;
+};
+
 module.exports = {
-  dummy, totalLikes, favoriteBlog,
+  dummy, totalLikes, favoriteBlog, mostBlogs,
 };
