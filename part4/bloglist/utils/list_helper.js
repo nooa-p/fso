@@ -9,6 +9,19 @@ const totalLikes = (blogs) => {
   return total;
 };
 
+const favoriteBlog = (blogs) => {
+  if (blogs.length > 0) {
+    let tempFave = blogs[0];
+    blogs.forEach((blog) => {
+      if (blog.likes > tempFave.likes) {
+        tempFave = blog;
+      }
+    });
+    return { title: tempFave.title, author: tempFave.author, likes: tempFave.likes };
+  }
+  return null;
+};
+
 module.exports = {
-  dummy, totalLikes,
+  dummy, totalLikes, favoriteBlog,
 };
