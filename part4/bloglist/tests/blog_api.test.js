@@ -57,9 +57,19 @@ test('a new blog post is created', async () => {
     url: 'https://testblog.org/id/2',
     likes: 7,
   };
-  const response = await api.post('/api/blogs', newBlog);
+  await api.post('/api/blogs', newBlog);
   const newResponse = await api.get('/api/blogs');
   expect(newResponse.body.length).toBe(3);
+});
+
+test('if no likes on new post, set likes at zero', async () => {
+  const newBlog = {
+    title: 'Another Test Post',
+    author: 'John Doe',
+    url: 'https://testblog.org/id/5',
+  };
+  const response = await api.post('/api/blogs', newBlog);
+  expect(response.body.likes).toBe(0);
 });
 
 afterAll(async () => {
