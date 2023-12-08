@@ -8,6 +8,31 @@ const app = require('../app');
 
 const api = supertest(app);
 
+const Blog = require('../models/blog');
+
+const initialBlogs = [
+  {
+    title: 'Example Blog Post',
+    author: 'John Doe',
+    url: 'https://exampleblog.co.uk/post/5',
+    likes: 4,
+  },
+  {
+    title: 'Awesome Things Post',
+    author: 'Jane Doe',
+    url: 'https://awesomethings.org/id/11',
+    likes: 7,
+  },
+];
+
+beforeEach(async () => {
+  await Blog.deleteMany({});
+  let blogObject = new Blog(initialBlogs[0]);
+  await blogObject.save();
+  blogObject = new Blog(initialBlogs[1]);
+  await blogObject.save();
+});
+
 test('blogs are returned as json', async () => {
   await api
     .get('/api/blogs')
@@ -17,12 +42,24 @@ test('blogs are returned as json', async () => {
 
 test('correct number of blogs is returned', async () => {
   const response = await api.get('/api/blogs');
-  expect(response.body).toHaveLength(3);
+  expect(response.body).toHaveLength(2);
 });
 
 test('unique identifier of blog posts is id', async () => {
   const response = await api.get('/api/blogs');
   expect(response.body[0].id).toBeDefined();
+});
+
+test('a new blog post is created', async () => {
+  const newBlog = {
+    title: 'Test Blog Post',
+    author: 'John Doe',
+    url: 'https://testblog.org/id/2',
+    likes: 7,
+  };
+  const response = await api.post('/api/blogs', newBlog);
+  const newResponse = await api.get('/api/blogs');
+  expect(newResponse.body.length).toBe(3);
 });
 
 afterAll(async () => {
