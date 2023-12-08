@@ -30,4 +30,4 @@
 - [x] **3.13-3.22** [phonebook database](https://github.com/nooa-p/fso-part3)
 
 ## part 4
-- [x] **4.1-4.2** [blog list](./part4/bloglist/)
+- [x] **4.1-4.11** [blog list](./part4/bloglist/)
