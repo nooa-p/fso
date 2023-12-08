@@ -72,6 +72,10 @@ test('if no likes on new post, set likes at zero', async () => {
   expect(response.body.likes).toBe(0);
 });
 
+test('respond 400 bad request when title or url empty', async () => {
+  // TODO
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
