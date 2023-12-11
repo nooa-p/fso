@@ -110,6 +110,17 @@ test('a single blog post can be deleted', async () => {
     .expect(204);
 });
 
+test('a blog post\'s likes can be updated', async () => {
+  const blog = {
+    likes: 12,
+  };
+  const response = await api.get('/api/blogs');
+  await api
+    .put(`/api/blogs/${response.body[0].id}`)
+    .send(blog)
+    .expect(200);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
