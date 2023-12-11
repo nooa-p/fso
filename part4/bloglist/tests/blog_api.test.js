@@ -103,6 +103,13 @@ describe('respond 400 bad request', () => {
   });
 });
 
+test('a single blog post can be deleted', async () => {
+  const response = await api.get('/api/blogs');
+  await api
+    .delete(`/api/blogs/${response.body[0].id}`)
+    .expect(204);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
