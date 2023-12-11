@@ -57,7 +57,10 @@ test('a new blog post is created', async () => {
     url: 'https://testblog.org/id/2',
     likes: 7,
   };
-  await api.post('/api/blogs', newBlog);
+  await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .set('Content-Type', 'application/json');
   const newResponse = await api.get('/api/blogs');
   expect(newResponse.body.length).toBe(3);
 });
@@ -68,12 +71,36 @@ test('if no likes on new post, set likes at zero', async () => {
     author: 'John Doe',
     url: 'https://testblog.org/id/5',
   };
-  const response = await api.post('/api/blogs', newBlog);
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .set('Content-Type', 'application/json');
   expect(response.body.likes).toBe(0);
 });
 
-test('respond 400 bad request when title or url empty', async () => {
-  // TODO
+describe('respond 400 bad request', () => {
+  test('when title is empty', async () => {
+    const newBlog = {
+      author: 'John Doe',
+      url: 'https://testblog.org/id/10',
+    };
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .set('Content-Type', 'application/json')
+      .expect(400);
+  });
+  test('when url is empty', async () => {
+    const newBlog = {
+      title: 'More Test Blogs',
+      author: 'John Doe',
+    };
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .set('Content-Type', 'application/json')
+      .expect(400);
+  });
 });
 
 afterAll(async () => {
