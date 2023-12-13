@@ -1,4 +1,7 @@
+/* eslint-disable consistent-return */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-underscore-dangle */
+const jwt = require('jsonwebtoken');
 const blogsRouter = require('express').Router();
 const Blog = require('../models/blog');
 const User = require('../models/user');
@@ -11,19 +14,27 @@ blogsRouter.get('/', async (request, response) => {
   // });
 });
 
-blogsRouter.post('/', async (request, response, next) => {
-  let user;
-  if (request.body.userId) {
-    user = await User.findById(request.body.userId);
-  } else {
-    user = await User.findById('65796a93c8a53a49499b9347');
+const getTokenFrom = (request) => {
+  const authorization = request.get('authorization');
+  if (authorization && authorization.startsWith('Bearer')) {
+    return authorization.replace('Bearer ', '');
   }
+  return null;
+};
+
+blogsRouter.post('/', async (request, response, next) => {
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' });
+  }
+  const user = await User.findById(decodedToken.id);
+
   const blog = new Blog({
     title: request.body.title,
     author: request.body.author,
     url: request.body.url,
     likes: request.body.likes || 0,
-    user: user.id,
+    user: user._id,
   });
   try {
     const result = await blog.save();
