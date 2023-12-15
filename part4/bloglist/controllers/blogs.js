@@ -3,6 +3,8 @@
 /* eslint-disable no-underscore-dangle */
 const blogsRouter = require('express').Router();
 const Blog = require('../models/blog');
+const User = require('../models/user');
+const middleware = require('../utils/middleware');
 
 blogsRouter.get('/', async (request, response) => {
   const blogs = await Blog.find({}).populate('user', { username: 1, name: 1 });
@@ -12,7 +14,7 @@ blogsRouter.get('/', async (request, response) => {
   // });
 });
 
-blogsRouter.post('/', async (request, response, next) => {
+blogsRouter.post('/', middleware.userExtractor, async (request, response, next) => {
   const { user } = request;
 
   const blog = new Blog({
@@ -35,7 +37,7 @@ blogsRouter.post('/', async (request, response, next) => {
   // });
 });
 
-blogsRouter.delete('/:id', async (request, response, next) => {
+blogsRouter.delete('/:id', middleware.userExtractor, async (request, response, next) => {
   const { user } = request;
   const blog = await Blog.findById(request.params.id);
   if (!(blog.user.toString() === user._id.toString())) {
@@ -43,6 +45,11 @@ blogsRouter.delete('/:id', async (request, response, next) => {
   }
   try {
     await Blog.findByIdAndDelete(request.params.id);
+    await User.findByIdAndUpdate(
+      user._id.toString(),
+      { $pull: { blogs: request.params.id } },
+      { new: true },
+    );
     response.status(204).end();
   } catch (exception) {
     next(exception);
