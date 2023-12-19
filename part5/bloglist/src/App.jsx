@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
+import BlogList from './components/BlogList'
 import Login from './components/Login'
 import BlogForm from './components/BlogForm'
 import blogService from './services/blogs'
@@ -56,7 +56,7 @@ const App = () => {
   const newBlog = async (blogObject) => {
     try {
       const blog = await blogService.create(blogObject)
-      setBlogs([...blogs, blog])
+      setBlogs(blogs.concat(blog))
       setFormVisible(false)
       setErrorMessage(`new blog ${blog.title} by ${blog.author} added`)
       setTimeout(() => {
@@ -78,17 +78,9 @@ const App = () => {
     setPassWord(e.target.value)
   }
 
-  const changeTitle = (e) => {
-    setTitle(e.target.value)
-  }
-
-  const changeAuthor = (e) => {
-    setAuthor(e.target.value)
-  }
-
-  const changeUrl = (e) => {
-    setUrl(e.target.value)
-  }
+  const blogsToShow = user
+    ? blogs.filter(blog => blog.user.username === user.username)
+    : blogs
 
   if (user === null) {
     return <Login errorMessage={errorMessage} handleSubmit={logIn} handleName={changeName} handlePass={changePass} username={userName} password={passWord} />
@@ -106,7 +98,7 @@ const App = () => {
       <BlogForm handleBlog={newBlog} />
       <button onClick={() => setFormVisible(false)}>cancel</button>
       </div>
-      {blogs.filter(blog => blog.user.username === user.username).map(blog => <Blog key={blog.id} blog={blog} />)}
+      <BlogList blogs={blogsToShow} />
     </div>
   )
 }
