@@ -11,4 +11,13 @@ const getAll = () => {
   return request.then(response => response.data)
 }
 
-export default { getAll, setToken }
+const create = newBlog => {
+  const auth = {
+    headers: { Authorization: token },
+  }
+
+  const request = axios.post(baseUrl, newBlog, auth)
+  return request.then(response => response.data)
+}
+
+export default { getAll, create, setToken }
