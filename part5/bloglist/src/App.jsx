@@ -10,9 +10,6 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [userName, setUserName] = useState('')
   const [passWord, setPassWord] = useState('')
-  const [title, setTitle] = useState('')
-  const [author, setAuthor] = useState('')
-  const [url, setUrl] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [formVisible, setFormVisible] = useState(false)
 
@@ -56,20 +53,10 @@ const App = () => {
     location.reload()
   }
 
-  const newBlog = async (e) => {
-    e.preventDefault()
+  const newBlog = async (blogObject) => {
     try {
-      const newBlog = {
-        title: title,
-        author: author,
-        url: url,
-        likes: Math.floor(Math.random() * 200)
-      }
-      const blog = await blogService.create(newBlog)
+      const blog = await blogService.create(blogObject)
       setBlogs([...blogs, blog])
-      setTitle('')
-      setAuthor('')
-      setUrl('')
       setFormVisible(false)
       setErrorMessage(`new blog ${blog.title} by ${blog.author} added`)
       setTimeout(() => {
@@ -116,7 +103,7 @@ const App = () => {
         <button onClick={() => setFormVisible(true)}>new note</button>
       </div>
       <div style={showWhenVisible}>
-      <BlogForm handleBlog={newBlog} title={title} handleTitle={changeTitle} author={author} handleAuthor={changeAuthor} url={url} handleUrl={changeUrl} />
+      <BlogForm handleBlog={newBlog} />
       <button onClick={() => setFormVisible(false)}>cancel</button>
       </div>
       {blogs.filter(blog => blog.user.username === user.username).map(blog => <Blog key={blog.id} blog={blog} />)}
