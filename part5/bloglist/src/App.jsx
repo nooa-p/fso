@@ -14,10 +14,14 @@ const App = () => {
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
+  const [formVisible, setFormVisible] = useState(false)
+
+  const hideWhenVisible = { display: formVisible ? 'none' : '' }
+  const showWhenVisible = { display: formVisible ? '' : 'none' }
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
-      setBlogs( blogs )
+      setBlogs(blogs)
     )  
   }, [])
 
@@ -66,6 +70,7 @@ const App = () => {
       setTitle('')
       setAuthor('')
       setUrl('')
+      setFormVisible(false)
       setErrorMessage(`new blog ${blog.title} by ${blog.author} added`)
       setTimeout(() => {
         setErrorMessage(null)
@@ -107,8 +112,14 @@ const App = () => {
       <h2>blogs</h2>
       <h3>{errorMessage}</h3>
       <p>{user.name} logged in <button onClick={logOut}>logout</button></p>
+      <div style={hideWhenVisible}>
+        <button onClick={() => setFormVisible(true)}>new note</button>
+      </div>
+      <div style={showWhenVisible}>
       <BlogForm handleBlog={newBlog} title={title} handleTitle={changeTitle} author={author} handleAuthor={changeAuthor} url={url} handleUrl={changeUrl} />
-      {blogs.map(blog => <Blog key={blog.id} blog={blog} />)}
+      <button onClick={() => setFormVisible(false)}>cancel</button>
+      </div>
+      {blogs.filter(blog => blog.user.username === user.username).map(blog => <Blog key={blog.id} blog={blog} />)}
     </div>
   )
 }
