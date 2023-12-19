@@ -6,6 +6,7 @@
 - [part 2](#part-2)
 - [part 3](#part-3)
 - [part 4](#part-4)
+- [part 5](#part-5)
 
 ## part 0
 - [x] **0.4** [New note diagram](./part0/new-note-diagram.md)
@@ -31,3 +32,6 @@
 
 ## part 4
 - [x] **4.1-4.22** [blog list](./part4/bloglist/)
+
+## part 5
+- [x] **5.1-5.4** [blog list](./part5/bloglist/)
