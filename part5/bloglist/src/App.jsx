@@ -11,6 +11,8 @@ const App = () => {
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [url, setUrl] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [showedBlogs, setShowedBlogs] = useState([])
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -27,6 +29,10 @@ const App = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setShowedBlogs(blogs.filter(blog => blog.user.username === user.username))
+  }, [blogs])
+
   const logIn = async (e) => {
     e.preventDefault()
     try {
@@ -37,7 +43,10 @@ const App = () => {
       setUserName('')
       setPassWord('')
     } catch (exception) {
-      console.log(exception)
+      setErrorMessage('wrong username or password')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
     }
   }
 
@@ -46,29 +55,37 @@ const App = () => {
     location.reload()
   }
 
-  const newBlog = (e) => {
+  const newBlog = async (e) => {
     e.preventDefault()
-    const newBlog = {
-      title: title,
-      author: author,
-      url: url,
-      likes: Math.floor(Math.random() * 200)
-    }
-
-    blogService
-    .create(newBlog)
-    .then(returned => {
-      setBlogs(blogs.concat(returned))
+    try {
+      const newBlog = {
+        title: title,
+        author: author,
+        url: url,
+        likes: Math.floor(Math.random() * 200)
+      }
+      const blog = await blogService.create(newBlog)
+      setBlogs(blogs.concat(blog))
       setTitle('')
       setAuthor('')
       setUrl('')
-    })
+      setErrorMessage(`new blog ${blog.title} by ${blog.author} added`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    } catch (exception) {
+      setErrorMessage('something went wrong')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
   }
 
   if (user === null) {
     return (
       <div>
         <h2>log in to application</h2>
+        <h3>{errorMessage}</h3>
         <form onSubmit={logIn}>
           username <input type="text" value={userName} onChange={(e) => setUserName(e.target.value)} /> <br />
           password <input type="password" value={passWord} onChange={(e) => setPassWord(e.target.value)} /> <br />
@@ -81,6 +98,7 @@ const App = () => {
   return (
     <div>
       <h2>blogs</h2>
+      <h3>{errorMessage}</h3>
       <p>{user.name} logged in <button onClick={logOut}>logout</button></p>
       <h2>create new</h2>
       <form onSubmit={newBlog}>
@@ -89,7 +107,7 @@ const App = () => {
           url: <input type="text" value={url} onChange={(e) => setUrl(e.target.value)} /> <br />
           <button type="submit">create</button>
       </form>
-      {blogs.filter(blog => blog.user.username === user.username).map(blog => <Blog key={blog.id} blog={blog} />)}
+      {showedBlogs.map(blog => <Blog key={blog.id} blog={blog} />)}
     </div>
   )
 }
