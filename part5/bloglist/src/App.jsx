@@ -100,7 +100,7 @@ const App = () => {
       <h3>{errorMessage}</h3>
       <p>{user.name} logged in <button onClick={logOut}>logout</button></p>
       <div style={hideWhenVisible}>
-        <button onClick={() => setFormVisible(true)}>new note</button>
+        <button onClick={() => setFormVisible(true)}>create new blog</button>
       </div>
       <div style={showWhenVisible}>
       <BlogForm handleBlog={newBlog} />
