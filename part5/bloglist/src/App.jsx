@@ -100,7 +100,7 @@ const App = () => {
   }
 
   const blogsToShow = user
-    ? blogs.filter(blog => blog.user.id === user.id || blog.user === user.id)
+    ? blogs.sort((a, b) => b.likes - a.likes).filter(blog => blog.user.id === user.id || blog.user === user.id)
     : blogs
 
   if (user === null) {
