@@ -70,6 +70,27 @@ const App = () => {
     }
   }
 
+  const addLike = async (oldblog) => {
+    try {
+      oldblog.likes = oldblog.likes + 1
+      const blog = await blogService.update(oldblog)
+      const index = blogs.indexOf(oldblog)
+      const newBlogs = blogs.map((b, i) => {
+        if (index === i) {
+          return blog
+        } else {
+          return b
+        }
+      })
+      setBlogs(newBlogs) 
+    } catch (exception) {
+      setErrorMessage('something went wrong')
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 5000)
+    }
+  }
+
   const changeName = (e) => {
     setUserName(e.target.value)
   }
@@ -98,7 +119,7 @@ const App = () => {
       <BlogForm handleBlog={newBlog} />
       <button onClick={() => setFormVisible(false)}>cancel</button>
       </div>
-      <BlogList blogs={blogsToShow} />
+      <BlogList blogs={blogsToShow} addLike={addLike} />
     </div>
   )
 }
