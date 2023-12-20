@@ -17,9 +17,9 @@ const App = () => {
   const showWhenVisible = { display: formVisible ? '' : 'none' }
 
   useEffect(() => {
-    blogService.getAll().then(blogs =>
+    blogService.getAll().then(blogs => {
       setBlogs(blogs)
-    )  
+  })  
   }, [])
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const App = () => {
     }
   }
 
-  const logOut = (e) => {
+  const logOut = () => {
     window.localStorage.removeItem('loggedUser')
     location.reload()
   }
@@ -79,7 +79,7 @@ const App = () => {
   }
 
   const blogsToShow = user
-    ? blogs.filter(blog => blog.user.username === user.username)
+    ? blogs.filter(blog => blog.user.id === user.id || blog.user === user.id)
     : blogs
 
   if (user === null) {
